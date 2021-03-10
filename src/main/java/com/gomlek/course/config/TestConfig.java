@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.gomlek.course.entities.Category;
 import com.gomlek.course.entities.Order;
 import com.gomlek.course.entities.OrderItem;
+import com.gomlek.course.entities.Payment;
 import com.gomlek.course.entities.Product;
 import com.gomlek.course.entities.User;
 import com.gomlek.course.entities.enums.OrderStatus;
@@ -48,7 +49,7 @@ public class TestConfig implements CommandLineRunner {
 		Category cat3 = new Category(null, "Computers");
 
 		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
-		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante", 2190.0, "");
+		Product p2 = new Product(null, "Smart TV", "sum ulla eu imperdiet purus. Maecenas ante", 2190.0, "");
 		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis", 1250.0, "");
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus", 100.99, "");
@@ -82,6 +83,17 @@ public class TestConfig implements CommandLineRunner {
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 	
+		
+		Payment pay1 = new Payment(null, Instant.parse("2019-07-22T21:21:22Z"), o1);
+		Payment pay2 = new Payment(null, Instant.parse("2021-02-25T22:40:00Z"), o2);
+		Payment pay3 = new Payment(null, Instant.parse("2020-08-16T09:30:00Z"), o3);
+		
+		o1.setPayment(pay1);
+		o2.setPayment(pay2);
+		o3.setPayment(pay3);
+		orderRepository.save(o1);
+		orderRepository.save(o2);
+		orderRepository.save(o3);
 	}
 
 }
