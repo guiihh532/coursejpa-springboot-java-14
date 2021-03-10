@@ -15,14 +15,14 @@ import com.gomlek.course.services.exceptions.ResourceNotFoundException;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 	
-	@ExceptionHandler(ResourceNotFoundException.class)
+	@ExceptionHandler(ResourceNotFoundException.class)//exception for database insert and delete
 	public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);
 	}
 	
-	@ExceptionHandler(DataBaseException.class)
+	@ExceptionHandler(DataBaseException.class)//exception for services
 	public ResponseEntity<StandardError> database(DataBaseException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
